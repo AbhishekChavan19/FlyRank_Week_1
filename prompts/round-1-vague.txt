@@ -1,0 +1,5 @@
+# Round 1 prompt (vague)
+
+> Make a settings form.
+
+No file paths, no validation rules, no accessibility requirements, no tests.
