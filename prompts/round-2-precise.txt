@@ -1,0 +1,45 @@
+# Round 2 prompt (precise)
+
+Build an account settings form for this Next.js app.
+
+## Context
+- App entry: `src/app/page.tsx` — render the form on the home page.
+- Stack: Next.js App Router, TypeScript, Tailwind CSS.
+- Create `src/components/SettingsForm.tsx` as a client component.
+
+## Fields
+1. **Display name** — required, trimmed, minimum 2 characters after trim.
+2. **Email** — required, valid email format.
+3. **Email notifications** — boolean toggle (default: on).
+4. **Timezone** — required `<select>` with at least: `UTC`, `America/New_York`, `Asia/Kolkata`.
+
+## Behavior
+- On valid submit: show an inline success message (not `alert()`), clear errors, log payload to console in dev only.
+- On invalid submit: show field-level error text below each invalid input.
+- Disable the submit button while submitting (300ms simulated delay is fine).
+- Trim display name before validation and submit.
+
+## Accessibility (required)
+- Every input has a visible `<label>` linked with `htmlFor` / `id`.
+- Invalid fields use `aria-invalid="true"` and `aria-describedby` pointing at the error element.
+- Checkbox/toggle has an associated label.
+
+## Constraints
+- Use `react-hook-form` + `zod` via `@hookform/resolvers/zod`; schema lives in `src/lib/settings-schema.ts`.
+- No inline `style={{}}` — Tailwind classes only.
+- No uncontrolled native form without RHF registration.
+
+## Verification
+1. Add `src/components/SettingsForm.test.tsx` with Vitest + Testing Library.
+2. Tests must cover: reject empty display name, reject invalid email, accept valid submit and show success message.
+3. Add `"test": "vitest run"` to `package.json` and run `npm test` — all tests must pass before finishing.
+
+## Example valid payload
+```json
+{
+  "displayName": "Abhishek",
+  "email": "abhi@example.com",
+  "emailNotifications": true,
+  "timezone": "Asia/Kolkata"
+}
+```
